@@ -1,19 +1,25 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+require('mongoose-currency').loadType(mongoose);
+const Currency = mongoose.Types.Currency;
+
 const rsvpSchema = new Schema({
-    name: {
+    firstname: {
         type: String,
         required: true,
-        unique: true
     },
-    description: {
+    lastname: {
         type: String,
-        required: true
+        required: true,
     },
-    featured: {
-        type: Boolean,
-        default: false
+    phonenum: {
+        type: Number,
+        required: false
+    },
+    email: {
+        type: String,
+        required: false,
     }
 },{
     timestamps: true
