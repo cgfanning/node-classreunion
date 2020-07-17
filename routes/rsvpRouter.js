@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const RSVP = require('../models/rsvp');
+const Rsvp = require('../models/rsvp');
 
 const rsvpRouter = express.Router();
 
@@ -8,17 +8,18 @@ rsvpRouter.use(bodyParser.json());
 
 rsvpRouter.route('/')
 .get((req,res, next) => {
-    RSVP.find()
+    Rsvp.find()
     .then(rsvps => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(rsvps);
     })
-    .catch(err => next(err));})
+    .catch(err => next(err));
+})
 .post((req, res, next) => {
-    RSVP.create(req.body)
+    Rsvp.create(req.body)
     .then(rsvp => {
-        console.log('Appetizer Created', rsvp);
+        console.log('RSVP Created', rsvp);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
         res.json(rsvp);
@@ -30,7 +31,7 @@ rsvpRouter.route('/')
     res.end('PUT operation no supported on /rsvps');
 })
 .delete((req, res, next) => {
-    RSVP.deleteMany()
+    Rsvp.deleteMany()
     .then(response => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -41,7 +42,7 @@ rsvpRouter.route('/')
 
 rsvpRouter.route('/:rsvpId')
 .get((req, res, next) => {
-    RSVP.findById(req.params.rsvpId)
+    Rsvp.findById(req.params.rsvpId)
     .then(rsvp => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');
@@ -54,7 +55,7 @@ rsvpRouter.route('/:rsvpId')
     res.end(`POST operation not supported on /rsvps/${req.params.rsvpId}`);
 })
 .put((req, res, next) => {
-    RSVP.findByIdAndUpdate(req.params.rsvpId, {
+    Rsvp.findByIdAndUpdate(req.params.rsvpId, {
         $set: req.body
     }, { new: true })
     .then(rsvp => {
@@ -65,7 +66,7 @@ rsvpRouter.route('/:rsvpId')
     .catch(err => next(err));
 })
 .delete((req, res, next) => {
-    RSVP.findByIdAndDelete(req.params.rsvpId)
+    Rsvp.findByIdAndDelete(req.params.rsvpId)
     .then(response => {
         res.statusCode = 200;
         res.setHeader('Content-Type', 'application/json');

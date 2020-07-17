@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const rsvpSchema = new Schema({
+const locationSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -11,6 +11,10 @@ const rsvpSchema = new Schema({
         type: String,
         required: true
     },
+    image: {
+        type: String,
+        required: false
+    },
     featured: {
         type: Boolean,
         default: false
@@ -19,6 +23,6 @@ const rsvpSchema = new Schema({
     timestamps: true
 });
 
-const Rsvp = mongoose.model('Rsvp', rsvpSchema);
+const Location = mongoose.model('RSVP', locationSchema);
 
-module.exports = Rsvp;
+module.exports = Location;
